@@ -5,7 +5,7 @@ var Builder = require('systemjs-builder');
 var builder = new Builder("/", "config.js");
 
 builder
-    .bundle('example/app.js', 'example/app-bundle.js')
+    .bundle('example/app.js', 'example/app-bundle.js', { minify: true, cssOptimize: true })
     .then(function () {
         console.log('Build complete');
     })
