@@ -27,7 +27,7 @@ To load less files in browser on the fly during development time, create **meta*
 packages: {
   "example": {
     "meta": {
-      "./\*.less": {
+      "./*.less": {
         "loader": "jack4it/system-less"
       }
     }
