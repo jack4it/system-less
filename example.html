@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>systemjs/builder LESS pulgin example</title>
+
+    <script src="jspm_packages/system.src.js"></script>
+    <script src="config.js"></script>
+
+    <script>
+        System.import('example/app.js')
+            .then(function (m) {
+                console.log(m.message);
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+
+    </script>
+</head>
+
+<body>
+    <div class="blue">I'm blue</div>
+    <div class="green">I'm green</div>
+    <div class="red">I'm red</div>
+</body>
+
+</html>

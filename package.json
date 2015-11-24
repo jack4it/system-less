@@ -1,0 +1,33 @@
+{
+  "name": "system-less",
+  "version": "0.1.0",
+  "description": "A systemjs/builder plugin to load/render LESS in browser on the fly and bundle rendered CSS during build time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "systemjs",
+    "systemjs-builder",
+    "jspm",
+    "less",
+    "plugin",
+    "browser",
+    "bundle",
+    "css"
+  ],
+  "author": "Jack Ma",
+  "license": "MIT",
+  "devDependencies": {
+    "jspm": "^0.16.15",
+    "systemjs-builder": "^0.14.11"
+  },
+  "jspm": {
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4",
+      "less": "npm:less@^2.5.3"
+    }
+  }
+}
