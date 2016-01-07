@@ -1,6 +1,25 @@
 var inBrowser = typeof window !== "undefined";
 
 if (inBrowser) {
+
+    // map that assigns an import to a set of modules that must be refreshed when that import is updated
+    var importToModules = {}
+    // register with the hotReloader wich must be present at `SystemhotReloader`
+    if (typeof System.hotReloader !== "undefined") {
+        console.log("hot reload: configuring hot reload for less")
+        System.hotReloader.on('change', (moduleName) => {
+            System.normalize(moduleName).then(function(normalizedName) {
+                var modules = importToModules[normalizedName]
+                if (modules) {
+                    return Promise.all(modules).map(function(module) {
+                        System.delete(module)
+                        return System.import(module)
+                    })
+                }
+            })
+        })
+    }
+
     exports.translate = function (load) {
         return System.import("less/lib/less-browser")
         .then(function (lesscWrapper) {
@@ -19,10 +38,26 @@ if (inBrowser) {
             // output.map = string of sourcemap
             // output.imports = array of string filenames of the imports referenced
 
-            var style = document.createElement('style');
-            style.setAttribute('type', 'text/css');
+            // add this module to the map of modules to refresh for each import
+            for (var i = 0; i < output.imports.length; i++) {
+                if (typeof importToModules[output.imports[i]] === "undefined") {
+                    importToModules[output.imports[i]] = [load.name]
+                } else {
+                    var modules = importToModules[output.imports[i]]
+                    if (modules.indexOf(load.name) !== -1) {
+                        modules.push(load.name)
+                    }
+                }
+            }
+
+            var styleId = encodeURI(load.name)
+            var style = document.getElementById(styleId)
+            if (!style) {
+                var style = document.createElement('style');
+                style.setAttribute('type', 'text/css');
+                document.getElementsByTagName('head')[0].appendChild(style);
+            }
             style.textContent = output.css;
-            document.getElementsByTagName('head')[0].appendChild(style);
 
             load.metadata.format = 'defined';
         });
