@@ -54,6 +54,7 @@ if (inBrowser) {
             var style = document.getElementById(styleId)
             if (!style) {
                 var style = document.createElement('style');
+                style.id = styleId
                 style.setAttribute('type', 'text/css');
                 document.getElementsByTagName('head')[0].appendChild(style);
             }
