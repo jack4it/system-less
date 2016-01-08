@@ -7,7 +7,7 @@ if (inBrowser) {
     // register with the hotReloader wich must be present at `SystemhotReloader`
     if (typeof System.hotReloader !== "undefined") {
         console.log("hot reload: configuring hot reload for less")
-        System.hotReloader.on('change', (moduleName) => {
+        System.hotReloader.on('change', function(moduleName) {
             System.normalize(moduleName).then(function(normalizedName) {
                 var modules = importToModules[normalizedName]
                 if (modules) {
