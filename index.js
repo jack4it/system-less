@@ -44,7 +44,7 @@ if (inBrowser) {
                     importToModules[output.imports[i]] = [load.name]
                 } else {
                     var modules = importToModules[output.imports[i]]
-                    if (modules.indexOf(load.name) !== -1) {
+                    if (modules.indexOf(load.name) === -1) {
                         modules.push(load.name)
                     }
                 }
